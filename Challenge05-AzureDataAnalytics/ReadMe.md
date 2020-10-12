@@ -44,8 +44,14 @@ From a data analytics perspective, it can often be helpful to first structure th
    * Here are couple links to get you started: [PowerBI](https://docs.microsoft.com/en-us/power-bi/fundamentals/power-bi-overview) and [PowerQuery](https://docs.microsoft.com/en-us/power-query/power-query-what-is-power-query).
    * Put on your analyst hat and explore/transform/visualize!
 * **2.2 Use pre-built template**
-   * Open the example [PowerBI PowerQuery Connector Example](./PowerBI%20-%20PowerQuery%20Connector%20for%20FHIR.pbix).
+   * **NOTE**: Depending on the data you loaded into FHIR in previous challenges you completed, you might have more or less fields than what's in the example below.
+   * Open the example [PowerBI PowerQuery Connector Template](./PowerBI%20-%20PowerQuery%20Connector%20for%20FHIR.pbix).
+   * Enter **FHIR Server URL** **https://{your resource prefix}.azurehealthcareapis.com**. You can get this from [Challenge01](../Challenge01-AzureAPIforFHIR/ReadMe.md). 
+   * Click the **Load** button.
+   * Sign-in using **admin user from Secondary tenant and password** and click **Connect**.
+   * Refresh time depends on volume of data in your Azure API for FHIR.
    * Put on your analyst hat and explore/transform/visualize!
+   * Save by clicking File --> Save.
 
 ## Option 2: Vizualize in PowerBI using Azure SQL DB Connector.
 ## Task #1: Process and Load FHIR data into Azure SQL Database using Azure Databricks
@@ -84,6 +90,7 @@ From a data analytics perspective, it can often be helpful to first structure th
 
 ## Task #2: Visualize in PowerBI using Azure SQL Server 
 * **2.1 Create from scratch**
+   * NOTE**: If you created **SQL Database Serverless** in Task #1 above, and have the default Auto-pause enabled, make sure the SQL Database is Online by connecting using one of the tools like Query editor in Portal, SSMS, SSDT... before proceeding.
    * Open PowerBI Desktop. [Download](https://powerbi.microsoft.com/en-us/downloads/) if you don't have one.
    * Go to **File** --> **Options and settings** --> **Data source settings** and click **Clear All Permissions**.
    * Click **Get Data** from the menu.
@@ -97,8 +104,9 @@ From a data analytics perspective, it can often be helpful to first structure th
    * Open the template [PowerBI SQL Connector Template](./PowerBI%20-%20SQL%20Connector.pbit).
    * Enter **SQL Server name** and **SQL Database name** from Task #1 above, in the popup. Click the **Load** button.
    * Choose **Database** in the left menu. Enter the SQL Server **User name** and **Password** and click **Connect**.
-   * PowerBI will refresh data from SQL Server.
+   * Refresh time depends on volume of data in your SQL Server.
    * Put on your analyst hat and explore/transform/visualize!
+   * Save by clicking File --> Save.
 
 ## Task #3: Clean Up Resources
 * **Pause/Disable/Stop** Azure resources created above if you are NOT going to use it immediately
