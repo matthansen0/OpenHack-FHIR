@@ -16,49 +16,9 @@ The first task has landed on you: In order to learn a bit about the capabilities
 
 ## Before you start
 
-Make sure you have completed the pre-work covered in the previous challenge: [Challenge00 - Pre-requisites: Technical and knowledge requirements for completing the Challenges](../Challenge00-Prerequistes/ReadMe.md).
+**If you haven't completed [Challenge00](../Challenge00-Prerequistes/ReadMe.md), complete them now.**
 
-* **NOTE**: This version of the OpenHack assumes hackers are on a **Windows client machine**, but hints are included for `*nix` users.
 * **Azure Subscription**: You will need permissions to perform CRUD operations in your Azure subscription.
-
-* **Microsoft Powershell**: You will need powershell in order to run the operations in this document. The correct installation steps for your platform can be found [here](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7).
-
-* **Install prerequisite PowerShell modules**: While there are other options, we recommend PowerShell scripts to provision your Azure API for FHIR resources in Windows. You can use either Azure PowerShell or Windows PowerShell and make sure you are running it as an administrator. (Right-click the PowerShell icon and choose **Run as Administrator**)
-   * Get PowerShell module version: Make sure your version is 5.1. If not, install [this](https://www.microsoft.com/en-us/download/details.aspx?id=54616) version.
-
-   ```powershell
-   $PSVersionTable.PSVersion
-   ```  
-   * Get Azure PowerShell module versions: If your results show Az version 4.1.0 and AzureAd version 2.0.2.4, then proceed to login step. If not, get the right versions.
-
-      ```powershell
-      Get-InstalledModule -Name Az -AllVersions
-      Get-InstalledModule -Name AzureAd -AllVersions
-      ```  
-
-   * If these aren't the versions you have installed, uninstall and re-install PowerShell modules: Uninstall Az and AzureAd modules and install the right version needed.
-      ```powershell
-      Uninstall-Module -Name Az
-      Uninstall-Module -Name AzureAD
-      ```  
-
-      ```powershell
-      Install-Module -Name Az -RequiredVersion 4.1.0 -Force -AllowClobber -SkipPublisherCheck
-      Install-Module AzureAD -RequiredVersion 2.0.2.4
-      ```
-
-   * **NOTE**: If you are using a **`*nix` platform (Mac or Linux)**, you will need to install the `AzureAD.Standard.Preview` module instead of `AzureAD`:
-      ```powershell
-      # Step 1: If you already installed the AzureAD module, uninstall it
-      Uninstall-Module AzureAD
-
-      # Step 2: Add a package source for AzureAD.Standard.Preview module
-      Register-PackageSource -Trusted -ProviderName 'PowerShellGet' -Name 'Posh Test Gallery' -Location https://www.poshtestgallery.com/api/v2/
-
-      # Step 3: Install and import AzureAD.Standard.Preview module
-      Install-Module AzureAD.Standard.Preview
-      Import-Module AzureAD.Standard.Preview
-      ```
 
 * **Active Directory Tenants**
 Active Directory is usually locked down at many customers as a securtiy best practice. Administrators control App Registrations and privilege to grant Role Assignments, users need extensive permissioning to get that unlocked. To avoid that road block, you can create another AD tenant. 
@@ -82,13 +42,13 @@ Active Directory is usually locked down at many customers as a securtiy best pra
       >   ```
 
 * **Create Secondary (Data) AD tenant**: Azure API for FHIR needs to be deployed into an Azure Active Directory tenant that allows for Data and Resource control plane authorization. Most companies lock down Active Directory App Registrations for security purposes which will prevent you from publishing an app, registering roles, or granting permissions. To avoid this, you will create a separate **Secondary (Data)** Active Directory domain. (A basic Azure Active Directory domain is a free service.)
-   * Use a browser to navigate to the Azure Portal, navigate to Azure Active Directory. Click "Create a tenant". Enter an Organization name e.g. "{yourname}fhirad". Enter an Initial domain name and click the Create button. This will be referred to as **Secondary (Data) AD** for clarity. 
+   * Use a browser to navigate to the Azure Portal, navigate to Azure Active Directory. Click "Create a tenant". Enter an Organization name e.g. "{uniquename}fhirad". Enter an Initial domain name and click the Create button. This will be referred to as **Secondary (Data) AD** for clarity. 
 
    * Connect to your **Secondary (Data) AD** and authenticate. **DO NOT SKIP THIS**
       ```powershell
-      Connect-AzureAd -TenantDomain **{{yourname}fhirad}.onmicrosoft.com**
+      Connect-AzureAd -TenantDomain **{{uniquename}fhirad}.onmicrosoft.com**
       ``` 
-   * Replace **{{yourname}fhirad}** with the name of the **Secondary (Data) AD** you created.
+   * Replace **{{uniquename}fhirad}** with the name of the **Secondary (Data) AD** you created.
 
 ## Getting Started
 
@@ -119,7 +79,7 @@ Active Directory is usually locked down at many customers as a securtiy best pra
       
 ---
 
-Team Discussion Q: How does FHIR improve on previous standards? (10 minutes)  
+Team Discussion Q: What is FHIR and how does FHIR improve on previous standards? (10 minutes)  
 
 ---
 
@@ -190,7 +150,7 @@ Team Discussion: What FHIR entities and attributes do you feel will be critical 
 ## Task #3: Validate Data Loaded
 
 * ### Use the Dashboard App
-    * Go to your **Secondary (Data) AD** tenant. Go to Azure AD, click on Users. Part of the deployment will create an admin user {ENVIRONMENTNAME}-admin@{yournamefhirad}.onmicrosoft.com. You can get the password from **dashboardUserPassword** you saved after Task #1. If you don't have it, click on the admin user and Reset password.
+    * Go to your **Secondary (Data) AD** tenant. Go to Azure AD, click on Users. Part of the deployment will create an admin user {ENVIRONMENTNAME}-admin@{uniquenamefhirad}.onmicrosoft.com. You can get the password from **dashboardUserPassword** you saved after Task #1. If you don't have it, click on the admin user and Reset password.
     * Go to **Primary (Resource) AD** tenant. Click on the App Service "{ENVIRONMENTNAME}dash". Copy the value of the App Service URL to your clipboard. Open the Azure portal in an "InPrivate" window. Navigate to the App Service URL from your clipboard and login using the admin user above. 
     * The dashboard will show you all the patients in the system where you can view each patient's medical details. You can click on the little black **fire** symbol against each record and view the FHIR bundle details.
       * You can click on resource links (e.g. Condition, Encounters, etc.) to examine those resources. 
@@ -226,6 +186,12 @@ Team Discussion: What FHIR entities and attributes do you feel will be critical 
 ## Task #4: Clean Up Resources
 * **Pause/Disable/Stop** Azure resources created above if you are NOT going to use them immediately.
 * **Delete** Azure resources created above if you DON'T need them anymore.
+
+---
+
+Break (15 minutes)
+
+---
 
 ## Congratulations! You have successfully completed Challenge01! 
 

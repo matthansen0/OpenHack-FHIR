@@ -43,15 +43,21 @@ From a data analytics perspective, it can often be helpful to first structure th
    * You should see all tables you selected are loaded into Power Query Editor.
    * Here are couple links to get you started: [PowerBI](https://docs.microsoft.com/en-us/power-bi/fundamentals/power-bi-overview) and [PowerQuery](https://docs.microsoft.com/en-us/power-query/power-query-what-is-power-query).
    * Put on your analyst hat and explore/transform/visualize!
-* **2.2 Use pre-built template**
+* **1.2 Use pre-built template**
    * **NOTE**: Depending on the data you loaded into FHIR in previous challenges you completed, you might have more or less fields than what's in the example below.
-   * Open the example [PowerBI PowerQuery Connector Template](./PowerBI%20-%20PowerQuery%20Connector%20for%20FHIR.pbix).
+   * Open the example [PowerBI PowerQuery Connector Template](./PowerBI%20-%20PowerQuery%20Connector%20for%20FHIR.pbit).
    * Enter **FHIR Server URL** **https://{your resource prefix}.azurehealthcareapis.com**. You can get this from [Challenge01](../Challenge01-AzureAPIforFHIR/ReadMe.md). 
    * Click the **Load** button.
    * Sign-in using **admin user from Secondary tenant and password** and click **Connect**.
    * Refresh time depends on volume of data in your Azure API for FHIR.
    * Put on your analyst hat and explore/transform/visualize!
    * Save by clicking File --> Save.
+
+---
+
+Team Discussion: What are your thoughts on using PowerQuery Connector for FHIR? Is this an option customers would be interested? If not, why? (10 minutes)
+
+---
 
 ## Option 2: Vizualize in PowerBI using Azure SQL DB Connector.
 ## Task #1: Process and Load FHIR data into Azure SQL Database using Azure Databricks
@@ -79,7 +85,7 @@ From a data analytics perspective, it can often be helpful to first structure th
    * Create or use the same Resource group as Azure SQL. Enter **Workspace name**, choose the same Location as Azure SQL. Click Create.
    * Once the deployment is complete, Click on **Launch Workspace**.
    * Click Clusters on the left and **Create Cluster**, default settings should be ok. Make sure **Terminate** is enabled.
-   * Click Workspace on the left. Click on down-arrow next to Workspace and **Import**. Download [Databricks Notebook](./fhirhackdatabrickstemplate.dbc) and Upload or Browse and click Import. **NOTE:** This notebook has code for all files that will be created in all challenges. If you are doing this challenge before completing all challenges, you won't have all .ndjson files in the Export Container. **Comment** out the code for the files that don't exist and **uncomment** when you complete all challenges.
+   * Click Workspace on the left. Click on down-arrow next to Workspace and **Import**. Download [Databricks Notebook](./fhirhackdatabrickstemplate.dbc) and Upload or Browse and click Import.    **NOTE:** This notebook has code for all data that will be loaded in all challenges. If you are doing this challenge before completing all challenges, you won't have all data (.ndjson files) in the Export Container. **Comment** out the code for the files that don't exist and **uncomment** when you complete all challenges. You might also need to tweak the [SQL DDL Script](./SQL%20DDL%20Script.txt) that you ran above.
    * Search for **<** and 
       * Update **storage account name, storage account key** in **Cmd 3** 
       * Update **container name** in **Cmd 7** from the Step above
@@ -87,6 +93,12 @@ From a data analytics perspective, it can often be helpful to first structure th
    * Start and attach your cluster.
    * Click **Run All**.
    * Go to **Query Editor** in the SQL DB you created and check if all 12 tables have data.
+
+---
+
+Break (15 minutes)
+
+---
 
 ## Task #2: Visualize in PowerBI using Azure SQL Server 
 * **2.1 Create from scratch**
@@ -107,6 +119,12 @@ From a data analytics perspective, it can often be helpful to first structure th
    * Refresh time depends on volume of data in your SQL Server.
    * Put on your analyst hat and explore/transform/visualize!
    * Save by clicking File --> Save.
+
+---
+
+Team Discussion: What are your thoughts on using SQL DB Connector over PowerQuery Connector for FHIR? Compare and Contrast? (10 minutes)
+
+---
 
 ## Task #3: Clean Up Resources
 * **Pause/Disable/Stop** Azure resources created above if you are NOT going to use it immediately

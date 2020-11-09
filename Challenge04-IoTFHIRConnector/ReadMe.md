@@ -114,6 +114,12 @@ You also team up with Data Scientist, where they want to analyze streaming obser
    * It will take 10-15 mins for the data to load into FHIR
    * More details on [Data Export](https://docs.microsoft.com/en-us/azure/iot-central/core/howto-export-data#set-up-data-export).
 
+---
+
+Team Discussion: What are the common IoMT devices used in healthcare? What is the value in loading IoMT data into FHIR? (10 minutes)
+
+---
+
 ## Task #3: Validate Data Loaded using Postman
 * If you haven't done setting up Postman in [Challenge01](../Challenge01-AzureAPIforFHIR/ReadMe.md), go back and complete that. 
 * Open **AuthorizeGetToken SetBearer** request in FHIR Hack folder, choose "FHIR Hack" in environments drop-down and Click Send. This will set the Bearer Token to the variable.
@@ -127,8 +133,21 @@ You also team up with Data Scientist, where they want to analyze streaming obser
 
 ## Congratulations! You have successfully completed Challenge04!
 
+---
+
+Break (15 minutes)
+
+---
+
 ## Help, I'm Stuck!
 * Below are some common setup issues that you might run into with possible resolution. If your error/issue is not here and you need assistance, please let your coach know.
+
+* In Postman, **Get Observation** in the Collection 
+   * Is this: {{fhirurl}}/Observation?code=http://loinc.org|8867-4
+   * If you get an error like below
+      <center><img src="../images/challenge04-observation.png" width="450"></center>
+
+   * Change to {{fhirurl}}/Observation. Your code might be different.
 
 
 ***

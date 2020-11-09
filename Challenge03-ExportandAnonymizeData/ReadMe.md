@@ -73,7 +73,7 @@ The FHIR Export with Anonymization uses the default settings in the Anonymizatio
 
 * **Connect to Secondary AD** and authenticate. **DO NOT SKIP THIS**.
     ```powershell
-    Connect-AzureAd -TenantDomain **{yourname}fhirad.onmicrosoft.com**
+    Connect-AzureAd -TenantDomain **Secondary AD Tenant**
     ```
 
 * **Deploy** the pipeline and enter a **new {ENVIRONMENTNAME}** when prompted. This will create a new Resource Group with that name, and deploy all services in that Resource Group. EnvironmentLocation is eastus by default.
@@ -107,6 +107,13 @@ The FHIR Export with Anonymization uses the default settings in the Anonymizatio
 ## Task #3: Validate Data Loaded
 * Go to Resource Group **{ENVIRONMENTNAME}** created in this Challenge.
 * Click on the **Logic App** and click **Run Trigger**. You can click on the Running status in Runs History below in the same screen. The time taken to complete depends on the volume of data you have in Azure API for FHIR.
+
+---
+
+Team Discussion: Is data anonymization an option? What scenarios would it not be? (10 minutes)
+
+---
+
 * When completed successfully, compare the pre and post de-identified data. 
    * **Pre de-identified data** is in the Storage Account **{ENVIRONMENTNAME}export** in **Resource Group** deployed in [Challenge01](../Challenge01-AzureAPIforFHIR/ReadMe.md). Look for the container with the latest date. The pre de-identified json files exported from Azure API for FHIR are stored here.
    * **Post de-identified data** is in the Storage Account **{ENVIRONMENTNAME}dlg2** created in this Challenge. Look for the container with output as suffix. The post de-identified json files are stored here.
@@ -116,6 +123,12 @@ The FHIR Export with Anonymization uses the default settings in the Anonymizatio
 * **Delete** Azure resources created above if you DON'T need them anymore.
 
 ## Congratulations! You have successfully completed Challenge03!
+
+---
+
+Break (15 minutes)
+
+---
 
 ## Help, I'm Stuck!
 Below are some common setup issues that you might run into with possible resolutions. If your error/issue is not here, please let your coach know.
@@ -127,7 +140,7 @@ Below are some common setup issues that you might run into with possible resolut
 
 * Logic App failed on **Get Token**
    * Go to Portal, go to **Secondary AD tenant**, search App Registrations, click on {ENVIRONMENTNAME}-service-client. {ENVIRONMENTNAME} is the one you used in Challenge01. Click Certificates & Secrets on the left. Click + New client secret, type a name, click Add. **Copy** the new Secret.
-   * Go to the **Primary AD tenant**, go to the KeyVault created by the ARM template in Challenge 3. Click Secrets on the left. Click on {ENVIRONMENTNAME}-service-client-secret. Click + New Version. **Paste** the Secret you copied above. Click Create.
+   * Go to the **Primary AD tenant**, go to the KeyVault created by the ARM template in Challenge 3. Click Secrets on the left. Click on {ENVIRONMENTNAME}-clientsecret. Click + New Version. **Paste** the Secret you copied above. Click Create.
    * Re-run the Logic App.
 
 * Logic App succeeded, but no output was found in Storage Account **{ENVIRONMENTNAME}dlg2**.  
